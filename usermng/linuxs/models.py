@@ -32,6 +32,7 @@ class User(models.Model):
 	additiongroup = models.ManyToManyField(UserGroup,related_name='+',blank=True)
 	shell = models.CharField(max_length=64,blank=False,default='/bin/bash')
 	useruid = models.IntegerField(blank=True,default='-1')
+	@classmethod
 	def groupname(self):
 		return self.group.groupname
 	def __str__(self):

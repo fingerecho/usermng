@@ -1,0 +1,5 @@
+*.conf
+*.pyc
+**/migrations
+*.swp
+**/__pycache__

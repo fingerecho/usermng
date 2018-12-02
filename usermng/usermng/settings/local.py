@@ -11,7 +11,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'usermng',
         'USER': 'fingeruser',
-        'PASSWORD': '',
+        'PASSWORD': 'fingerechoroot123',
         'HOST':'va.fyping.cn',
         'PORT': '5444',
 		'CONN_MAX_AGE': None,

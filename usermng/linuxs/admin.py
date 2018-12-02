@@ -10,7 +10,7 @@ class UserGroupAdmin(admin.ModelAdmin):
 
 
 class UserAdmin(admin.ModelAdmin):
-	list_display = ['id','status','name','directory','password']
+	list_display = ['id','status','name',User.groupname,'directory','password']
 	exclude = []
 	actions = [add_user,del_user_and_its_dir,del_user,show_all_linux_user]
 
