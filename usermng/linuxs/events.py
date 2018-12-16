@@ -169,4 +169,16 @@ def get_users_group_name(username):
 	finally:
 		return result,err
 
+def change_user_directory(username,directory):
+	try:
+		res = run(['chown','-R','%s:%s'%(username,username),directory],stdout=PIPE,stderr=PIPE)
+		if res.returncode == 0:
+			result = "%s %s finished"%(username,directory)
+		else:
+			result = res.stderr.decode(encoding=DEFAULT_ENCODING)
+	except Exception as e:
+		result = e
+	finally:
+		return result
+
 

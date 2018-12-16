@@ -1,8 +1,8 @@
 #from logging import info as Info__
 from django.contrib import messages
-from .events import GroupFunc ,show_all_linux_groups,UserFuncCls,show_all_user_name,get_users_group_name
+from .events import GroupFunc ,show_all_linux_groups,UserFuncCls,show_all_user_name,get_users_group_name, change_user_directory
 from .models import UserGroup,User
-
+from re import match, compile
 
 def add_user_group(modeladmin,request,queryset):
 	for group in queryset:
@@ -91,3 +91,16 @@ def show_all_linux_user(modeladmin,request,queryset):
 						directory='-*-')
 	messages.info(request,"this is all your wanted to see ")
 show_all_linux_user.short_description = "show all linux user on here"
+def chown_linux_user_to_directory(modeladmin,request,queryset):
+	results=[]
+	success_num = 0
+	for li in queryset:
+		pat = compile(li.name)
+		tmp = change_user_directory(li)
+		if match(pat,tmp):
+			success_num = success_num + 1
+		else:
+			results.append(tmp)
+	messages.info(request,"%d finished %d successfully"%(len(queryset),success_num)+"{result}".format(
+		result=str("failed reason %s :%s"%("is" if len(queryset)==1 else "are","".join(results))) if len(queryset)>success_num else " all are success")
+chown_linux_user_to_directory.short_description = "改变目录的属主"

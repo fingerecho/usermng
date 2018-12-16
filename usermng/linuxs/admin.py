@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import UserGroup , User
-from .action import  add_user_group ,del_user_group, modify_group_GID,modify_group_name, show_all_group_in_linux,add_user,del_user_and_its_dir,del_user,show_all_linux_user
+from .action import  add_user_group ,del_user_group, modify_group_GID,modify_group_name, show_all_group_in_linux,add_user,del_user_and_its_dir,del_user,show_all_linux_user,chown_linux_user_to_directory
 
 class UserGroupAdmin(admin.ModelAdmin):
 	list_display = ['id','status','groupGID','groupName','groupPassword']
@@ -12,7 +12,7 @@ class UserGroupAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
 	list_display = ['id','status','name',User.groupname,'directory','password']
 	exclude = []
-	actions = [add_user,del_user_and_its_dir,del_user,show_all_linux_user]
+	actions = [add_user,del_user_and_its_dir,del_user,show_all_linux_user,chown_linux_user_to_directory]
 
 
 admin.site.register(User,UserAdmin)
